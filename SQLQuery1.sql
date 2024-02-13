@@ -1,0 +1,1 @@
+﻿SELECT * FROM Kits WHERE K_Id=1 

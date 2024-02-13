@@ -1,0 +1,1 @@
+﻿SELECT * FROM Researchs WHERE ResearchId=1
