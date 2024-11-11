@@ -15,15 +15,15 @@ namespace DAL
             string sql;
             if (Tmp.DepartmentId == -1)
             {
-                sql = $"insert into Department(DepartmentId,DepartmentName,K_tag,K_BarCode,K_desk,K_imageName,C_id,K_quantityPart) " +
-                         $"values(@DepartmentId,@DepartmentName,@K_tag,@K_BarCode,@K_desk,@K_imageName,@C_id,@K_quantityPart)";
+                sql = $"insert into Department(DepartmentName) " +
+                         $"values(@DepartmentName)";
             }
             else
             {
                 sql = $"Update Department set " +
-                    $"DepartmentId=@DepartmentId," +
-                    
-                    $"DepartmentName=@DepartmentName,  Where DepartmentId = @DepartmentId";
+                     $"DepartmentName=@DepartmentName  Where DepartmentId = @DepartmentId";
+
+
 
 
             }
@@ -48,7 +48,7 @@ namespace DAL
 
             if (Tmp.DepartmentId == -1)
             {
-                sql = "$=Select max(DepartmentId) from Department where DepartmentName=N'{DepartmentName}'";
+                sql = $"Select max(DepartmentId) from Department where DepartmentName=N'{Tmp.DepartmentName}'";
                 Tmp.DepartmentId = (int)Db.ExecuteScalar(sql);
             }
             Db.Close();
@@ -59,7 +59,7 @@ namespace DAL
         public static List<Department> GetAll()
         {
             List<Department> DepartmentList = new List<Department>();
-            string Sql = "Select * from Kits";
+            string Sql = "Select * from Department";
             DBcontext Db = new DBcontext();
             DataTable Dt = Db.Execute(Sql);
             for (int i = 0; i < Dt.Rows.Count; i++)

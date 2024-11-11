@@ -12,9 +12,9 @@ namespace BLL
 
         public string PartName { get; set; }
 
-        public string PartImagieName { get; set; }
+        public string PartImiageName { get; set; }
 
-        public string PartDate { get; set; }
+        public string PartDateReceiving { get; set; }
         
 
         //שמירת כל הקיטים

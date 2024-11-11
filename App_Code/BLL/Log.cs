@@ -9,10 +9,10 @@ namespace BLL
     public class Log
     {
         public int LogId { get; set; }
-        public DateTime TimeAction { get; set; }
+        public string TimeAction { get; set; }
         public string LogTime { get; set; }
         public string DueIn { get; set; }
-        public string DiaryRemarks { get; set; }
+        public string LogRemarks { get; set; }
         //שמירת כל הקיטים
         public void Save()
         {

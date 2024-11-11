@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using System.Reflection;
+
 //using DataCollectorTasks;
 
 namespace Data
@@ -87,7 +88,7 @@ namespace Data
 
         }
         
-
+        
       
 
         public void Open()

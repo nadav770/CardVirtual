@@ -8,11 +8,11 @@ namespace BLL
 {
     public class StockPart
     {
-        public int StockPartId { get; set; }
-        public string StockPartDateIn { get; set; }
+        public int StockPartsId { get; set; }
+        public string StockPartsDateReiciving { get; set; }
         public string SeriesActionPart { get; set; }
-        public bool StockPartStatus { get; set; }
-        public string StockPartDateOut { get; set; }
+        public int StockPartsStatus { get; set; }
+        public string StockPartsDateEnd { get; set; }
         
         //שמירת כל הקיטים
         public void Save()

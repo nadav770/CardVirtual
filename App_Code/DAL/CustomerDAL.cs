@@ -16,22 +16,22 @@ namespace DAL
             string sql;
             if (Tmp.CustomerId == -1)
             {
-                sql = $"insert into Customers(C_id,C_name,C_Adress,C_phone,ContactPersonName,ContactPersonPhone,C_date,Remarks,C_status,C_mail) " +
-                         $"values(@C_id,@C_name,@C_Adress,@C_phone,@ContactPersonName,@ContactPersonPhone,@C_date,@Remarks,@C_status,@C_mail)";
+                sql = $"insert into Customer(CustomerName,CustomerAdress,CustomerPhone,CustomerContactPerson,CustomerContactPersonPhone,CustomerDateStart,Remarks,CustomerStatus,CustomerMail) " +
+                         $"values(@CustomerName,@CustomerAdress,@CustomerPhone,@CustomerContactPerson,@CustomerContactPersonPhone,@CustomerDateStart,@Remarks,@CustomerStatus,@CustomerMail)";
             }
             else
             {
-                sql = $"Update Customers set " +
-                    $"C_id=@C_id," +
-                    $"C_name=@C_name," +
-                    $"C_Adress=@C_Adress," +
-                    $"C_phone=@C_phone," +
-                    $"ContactPersonName=@ContactPersonName," +
-                    $"ContactPersonPhone=@ContactPersonPhone," +
-                    $"C_date=@C_date," +
-                    $"C_status=@C_status,"+
-                    $"C_mail=@C_mail"+
-                    $"Remarks=@Remarks,  Where C_id = @C_id";
+
+                sql = $"Update Customer set " +
+                $"CustomerName=@CustomerName," +
+                    $"CustomerAdress=@CustomerAdress," +
+                    $"CustomerPhone=@CustomerPhone," +
+                    $"CustomerContactPerson=@CustomerContactPerson," +
+                    $"CustomerContactPersonPhone=@CustomerContactPersonPhone," +
+                    $"CustomerDateStart=@CustomerDateStart," +
+                    $"CustomerStatus=@CustomerStatus,"+
+                    $"CustomerMail=@CustomerMail"+
+                    $"Remarks=@Remarks   Where CustomerId = @CustomerId";
 
 
             }
@@ -41,16 +41,16 @@ namespace DAL
             var obj = new
 
             {
-                C_id = Tmp.CustomerId,
-                C_name = Tmp.CustomerName,
-                C_Adress = Tmp.CustomerAdress,
-                C_phone = Tmp.CustomerPhone,
-                ContactPersonName = Tmp.CustomerContactPerson,
-                ContactPersonPhone = Tmp.CustomerContactPersonPhone,
-                C_date = Tmp.CustomerDateStart,
+                CustomerId = Tmp.CustomerId,
+                CustomerName = Tmp.CustomerName,
+                CustomerAdress = Tmp.CustomerAdress,
+                CustomerPhone = Tmp.CustomerPhone,
+                CustomerContactPerson = Tmp.CustomerContactPerson,
+                CustomerContactPersonPhone = Tmp.CustomerContactPersonPhone,
+                CustomerDateStart = Tmp.CustomerDateStart,
                 Remarks = Tmp.Remarks,
-                C_status=Tmp.CustomerStatus,
-                C_mail=Tmp.CustomerMail
+                CustomerStatus=Tmp.CustomerStatus,
+                CustomerMail=Tmp.CustomerMail
             };
 
 
@@ -63,7 +63,7 @@ namespace DAL
 
             if (Tmp.CustomerId == -1)
             {
-                sql = "$=Select max(C_id) from Customers where C_name=N'{C_name}'";
+                sql = $"Select max(CustomerId) from Customer where CustomerName=N'{Tmp.CustomerName}'";
                 Tmp.CustomerId = (int)Db.ExecuteScalar(sql);
             }
             Db.Close();
@@ -74,23 +74,23 @@ namespace DAL
         public static List<Customer> GetAll()
         {
             List<Customer> CustomerList = new List<Customer>();
-            string Sql = "Select * from Customers";
+            string Sql = "Select * from Customer";
             DBcontext Db = new DBcontext();
             DataTable Dt = Db.Execute(Sql);
             for (int i = 0; i < Dt.Rows.Count; i++)
             {
                 Customer tmp = new Customer()
                 {
-                    CustomerId = int.Parse(Dt.Rows[i]["C_id"].ToString()),
-                    CustomerName= Dt.Rows[i][" C_name"].ToString(),
-                    CustomerAdress = Dt.Rows[i]["C_Adress"].ToString(),
-                    CustomerPhone = Dt.Rows[i]["C_phone"].ToString(),
-                    CustomerContactPerson = Dt.Rows[i]["ContactPersonName"].ToString(),
-                    CustomerContactPersonPhone = Dt.Rows[i]["ContactPersonPhone"].ToString(),
-                    CustomerDateStart = Dt.Rows[i]["C_date"].ToString(),
+                    CustomerId = int.Parse(Dt.Rows[i]["CustomerId"].ToString()),
+                    CustomerName= Dt.Rows[i][" CustomerName"].ToString(),
+                    CustomerAdress = Dt.Rows[i]["CustomerAdress"].ToString(),
+                    CustomerPhone = Dt.Rows[i]["CustomerPhone"].ToString(),
+                    CustomerContactPerson = Dt.Rows[i]["CustomerContactPerson"].ToString(),
+                    CustomerContactPersonPhone = Dt.Rows[i]["CustomerContactPersonPhone"].ToString(),
+                    CustomerDateStart = Dt.Rows[i]["CustomerDateStart"].ToString(),
                     Remarks = Dt.Rows[i]["Remarks"].ToString(),
-                    CustomerStatus = int.Parse(Dt.Rows[i]["C_status"].ToString()),
-                    CustomerMail = Dt.Rows[i]["C_mail"].ToString()
+                    CustomerStatus = int.Parse(Dt.Rows[i]["CustomerStatus"].ToString()),
+                    CustomerMail = Dt.Rows[i]["CustomerMail"].ToString()
 
                 };
                 CustomerList.Add(tmp);
@@ -101,23 +101,23 @@ namespace DAL
         public static Customer GetById(int Id)
         {
             Customer tmp = null;
-            string Sql = $"Select * from Customers Where C_id = {Id}";
+            string Sql = $"Select * from Customer Where CustomerId = {Id}";
             DBcontext Db = new DBcontext();
             DataTable Dt = Db.Execute(Sql);
             if (Dt.Rows.Count > 0)
             {
                 tmp = new Customer()
                 {
-                    CustomerId = int.Parse(Dt.Rows[0]["C_id"].ToString()),
-                    CustomerName = Dt.Rows[0][" C_name"].ToString(),
-                    CustomerAdress = Dt.Rows[0]["C_Adress"].ToString(),
-                    CustomerPhone = Dt.Rows[0]["C_phone"].ToString(),
-                    CustomerContactPerson= Dt.Rows[0]["ContactPersonName"].ToString(),
-                    CustomerContactPersonPhone = Dt.Rows[0]["ContactPersonPhone"].ToString(),
-                    CustomerDateStart = Dt.Rows[0]["C_date"].ToString(),
-                    CustomerStatus = int.Parse(Dt.Rows[0]["C_status"].ToString()),
+                    CustomerId = int.Parse(Dt.Rows[0]["CustomerId"].ToString()),
+                    CustomerName = Dt.Rows[0][" CustomerName"].ToString(),
+                    CustomerAdress = Dt.Rows[0]["CustomerAdress"].ToString(),
+                    CustomerPhone = Dt.Rows[0]["CustomerPhone"].ToString(),
+                    CustomerContactPerson= Dt.Rows[0]["CustomerContactPerson"].ToString(),
+                    CustomerContactPersonPhone = Dt.Rows[0]["CustomerContactPersonPhone"].ToString(),
+                    CustomerDateStart = Dt.Rows[0]["CustomerDateStart"].ToString(),
+                    CustomerStatus = int.Parse(Dt.Rows[0]["CustomerStatus"].ToString()),
                     Remarks = Dt.Rows[0]["Remarks"].ToString(),
-                    CustomerMail = Dt.Rows[0]["C_mail"].ToString()
+                    CustomerMail = Dt.Rows[0]["CustomerMail"].ToString()
 
                 };
 
@@ -127,7 +127,7 @@ namespace DAL
         }
         public static int DeleteById(int Id)
         {
-            string Sql = $"Delete from  Customers Where C_id = {Id}";
+            string Sql = $"Delete from  Customer Where CustomerId = {Id}";
             DBcontext Db = new DBcontext();
             int Total = Db.ExecuteNonQuery(Sql);
             Db.Close();

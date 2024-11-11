@@ -14,8 +14,8 @@ namespace BLL
 
         public string ResearchDate { get; set; }
         public string ResearchDesc { get; set; }
-        public string ResearchDateReceipt { get; set; }
-        public string ResearchConclusion { get; set; }
+        public string ResearchDateReciving { get; set; }
+        public string Conclusions { get; set; }
         //שמירת כל הקיטים
         public void Save()
         {

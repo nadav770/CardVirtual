@@ -1,14 +1,14 @@
 ﻿using BLL;
-using Controller;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
+//using System.Linq;
 //using System.Net.Http;
 using System.Web;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using DataCollectorTasks;
+
 using Data;
 
 namespace DAL
@@ -21,20 +21,22 @@ namespace DAL
             string sql;
             if (Tmp.KitId == -1)                
             {
-                sql = $"insert into Kits(K_Id,K_name,K_tag,K_BarCode,K_desk,K_imageName,C_id,K_quantityPart) " +
-                         $"values(@K_Id,@K_name,@K_tag,@K_BarCode,@K_desk,@K_imageName,@C_id,@K_quantityPart)";
+                sql = $"insert into Kits(KitName,KitTag,KitBarcode,KitDesc,KitImage,CustomerId,KitNumOfParts,KitStatus ) " +
+                         $"values(@KitName,@KitTag,@KitBarcode,@KitDesc,@KitImage,@CustomerId,@KitNumOfParts,@KitStatus)";
             }
             else
             {
                 sql = $"Update Kits set " +
-                    $"K_Id=@K_Id," +
-                    $"K_name=@K_name," +
-                    $"K_tag=@K_tag," +
-                    $"K_BarCode=@K_BarCode," +
-                    $"K_desc=@K_desc," +
-                    $"K_imageName=@K_imageName," +
-                    $"C_id=@C_id," +
-                    $"K_quantityPart=@K_quantityPart,  Where K_Id = @K_Id";
+                   
+                    $"KitName=@KitName," +
+                    $"KitTag=@KitTag," +
+                    $"KitBarcode=@KitBarcode," +
+                    $"KitDesc=@KitDesc," +
+                    $"KitImage=@KitImage," +
+                    $"CustomerId=@CustomerId," +
+                    $"KitNumOfParts=@KitNumOfParts," +
+                     $"KitStatus=@KitStatus    WHERE       KitId = @KitId";
+
 
 
             }
@@ -44,14 +46,15 @@ namespace DAL
             var obj = new
             
             {
-                K_Id = Tmp.KitId,
-                K_name = Tmp.KitName,
-                K_tag = Tmp.KitTag,
-                K_BarCode = Tmp.KitBarcode,
-                K_desc = Tmp.KitDesc,
-                K_imageName = Tmp.KitImage,
-                C_id = Tmp.Cid,
-                K_quantityPart = Tmp.KitNumOfParts,
+                KitId = Tmp.KitId,
+                KitName = Tmp.KitName,
+                KitTag = Tmp.KitTag,
+                KitBarcode = Tmp.KitBarcode,
+                KitDesc = Tmp.KitDesc,
+                KitImage = Tmp.KitImage,
+                CustomerId = Tmp.CustomerId,
+                KitNumOfParts = Tmp.KitNumOfParts,
+                KitStatus = Tmp.KitStatus,  
             };
 
             var parameters = DBcontext.CreateParameters(obj);
@@ -64,7 +67,7 @@ namespace DAL
 
             if (Tmp.KitId == -1)
             {
-                sql = "$=Select max(K_Id) from Kits where K_name=N'{K_name}'";
+                sql = $"Select max(KitId) from Kits where KitName=N'{   Tmp.KitName}'";
                 Tmp.KitId = (int)Db.ExecuteScalar(sql);
             }
             Db.Close();
@@ -72,7 +75,7 @@ namespace DAL
 
 
         }
-        public static List<Kit> GetAll()
+        public static List<Kit> GetAll()                                                                     
         {
             List<Kit> KitList = new List<Kit>();
             string Sql = "Select * from Kits";
@@ -82,17 +85,21 @@ namespace DAL
             {
                 Kit tmp = new Kit()
                 {
-                   KitId = int.Parse(Dt.Rows[i]["K_Id"].ToString()),
-                    KitName = Dt.Rows[i]["K_name"].ToString(),
-                    KitImage = Dt.Rows[i]["K_imageName"].ToString(),
-                    KitBarcode= Dt.Rows[i]["K_BarCode"].ToString(),
-                    KitDesc = Dt.Rows[i]["K_desc"].ToString(),
-                    KitNumOfParts = int.Parse(Dt.Rows[i]["K_quantityPart"].ToString()),
-                    KitTag = Dt.Rows[i]["K_tag"].ToString(),
-                    Cid = int.Parse(Dt.Rows[i]["C_id"].ToString()),
+
+                    KitId = int.Parse(Dt.Rows[i]["KitId"].ToString()),
+                    KitName = Dt.Rows[i]["KitName"].ToString(),
+                    KitTag = Dt.Rows[i]["KitTag"].ToString(),
+                    KitBarcode = Dt.Rows[i]["KitBarcode"].ToString(),
+                    KitDesc = Dt.Rows[i]["KitDesc"].ToString(),
+                    KitImage = Dt.Rows[i]["KitImage"].ToString(),
+                    CustomerId = int.Parse(Dt.Rows[i]["CustomerId"].ToString()),
+                    KitNumOfParts = int.Parse(Dt.Rows[i]["KitNumOfParts"].ToString()),
+                    KitStatus = int.Parse(Dt.Rows[i]["KitStatus"].ToString())
+
 
 
                 };
+
                 KitList.Add(tmp);
             }
             Db.Close();
@@ -101,22 +108,26 @@ namespace DAL
         public static Kit GetById(int Id)
         {
            Kit tmp = null; 
-            string Sql = $"Select * from Kits Where K_id = {Id}";
+            string Sql = $"Select * from Kits Where KitId = {Id}";
             DBcontext Db = new DBcontext();
             DataTable Dt = Db.Execute(Sql);
             if (Dt.Rows.Count > 0)
             {
                 tmp = new Kit()
                 {
-                   KitId = int.Parse(Dt.Rows[0]["K_Id"].ToString()),
-                    KitName = Dt.Rows[0]["K_name"].ToString(),
-                   KitImage = Dt.Rows[0]["K_imageName"].ToString(),
-                    KitDesc = Dt.Rows[0]["K_desc"].ToString(),
-                   KitBarcode = Dt.Rows[0]["K_BarCode"].ToString(),
-                    KitTag = Dt.Rows[0]["K_tag"].ToString(),
-                    KitNumOfParts = int.Parse(Dt.Rows[0]["K_quantityPart"].ToString()),
-                    Cid = int.Parse(Dt.Rows[0]["Cid"].ToString()),
-                    
+                    KitId = int.Parse(Dt.Rows[0]["KitId"].ToString()),
+                    KitName = Dt.Rows[0]["KitName"].ToString(),
+                    KitTag = Dt.Rows[0]["KitTag"].ToString(),
+                    KitBarcode = Dt.Rows[0]["KitBarcode"].ToString(),
+                    KitDesc = Dt.Rows[0]["KitDesc"].ToString(),
+                    KitImage = Dt.Rows[0]["KitImage"].ToString(),
+                    CustomerId = int.Parse(Dt.Rows[0]["CustomerId"].ToString()),
+                    KitNumOfParts = int.Parse(Dt.Rows[0]["KitNumOfParts"].ToString()),
+                    KitStatus = int.Parse(Dt.Rows[0]["KitStatus"].ToString()),
+
+
+
+
                 };
 
             }
@@ -125,7 +136,7 @@ namespace DAL
         }
         public static int DeleteById(int Id)
         {
-            string Sql = $"Delete from  Kits Where K_Id = {Id}";
+            string Sql = $"Delete from  Kits Where KitId = {Id}";
             DBcontext Db = new DBcontext();
             int Total = Db.ExecuteNonQuery(Sql);
             Db.Close();

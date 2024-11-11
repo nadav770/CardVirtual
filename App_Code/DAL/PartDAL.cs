@@ -15,17 +15,17 @@ namespace DAL
             string sql;
             if (Tmp.PartId == -1)
             {
-                sql = $"insert into Parts(PartId,PartName,PartImiageName,PartDateReceiving) " +
-                         $"values(@PartId,@PartName,@PartImiageName,@PartDateReceiving)";
+                sql = $"insert into Parts(PartName,PartImiageName,PartDateReceiving) " +
+                         $"values(@PartName,@PartImiageName,@PartDateReceiving)";
             }
             else
             {
                 sql = $"Update Parts set " +
-                    $"PartId=@PartId," +
+                    
                     $"PartName=@PartName," +
                     $"PartImiageName=@PartImiageName," +
                     
-                    $"PartDateReceiving=@PartDateReceiving,Where PartId = @PartId";                                                
+                    $"PartDateReceiving=@PartDateReceiving Where PartId = @PartId";                                                
 
 
             }
@@ -37,8 +37,8 @@ namespace DAL
             {
                 PartId = Tmp.PartId,
                 PartName = Tmp.PartName,
-                PartImiageName = Tmp.PartImagieName,
-                PartDateReceiving = Tmp.PartDate,
+                PartImiageName = Tmp.PartImiageName,
+                PartDateReceiving = Tmp.PartDateReceiving,
                 
             };
 
@@ -52,7 +52,7 @@ namespace DAL
 
             if (Tmp.PartId == -1)
             {
-                sql = "$=Select max(PartId) from Parts where PartName=N'{PartName}'";
+                sql = $"Select max(PartId) from Parts where PartName =N'{Tmp.PartName}'";
                 Tmp.PartId = (int)Db.ExecuteScalar(sql);
             }
             Db.Close();
@@ -72,8 +72,8 @@ namespace DAL
                 {
                     PartId = int.Parse(Dt.Rows[i]["PartId"].ToString()),
                     PartName = Dt.Rows[i]["PartName"].ToString(),
-                    PartImagieName = Dt.Rows[i]["PartImiageName"].ToString(),
-                    PartDate = Dt.Rows[i]["PartDateReceiving"].ToString(),
+                    PartImiageName = Dt.Rows[i]["PartImiageName"].ToString(),
+                    PartDateReceiving =  Dt.Rows[i]["PartDateReceiving"].ToString(),
                     
 
                 };
@@ -94,8 +94,8 @@ namespace DAL
                 {
                     PartId = int.Parse(Dt.Rows[0]["PartId"].ToString()),
                     PartName = Dt.Rows[0]["PartName"].ToString(),
-                    PartImagieName = Dt.Rows[0]["PartImiageName"].ToString(),
-                    PartDate = Dt.Rows[0]["PartDateReceiving"].ToString(),
+                    PartImiageName = Dt.Rows[0]["PartImiageName"].ToString(),
+                    PartDateReceiving =  Dt.Rows[0]["PartDateReceiving"].ToString(),
                    
 
                 };

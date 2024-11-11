@@ -12,10 +12,8 @@ namespace BLL
         public string ExtendedDescription { get; set; }
         public int JobId { get; set; }
         public string DateIn { get; set; }
-
-
         public string DueDate { get; set; }
-        public bool StockKitStatus { get; set; }
+        public int mude { get; set; }
         //שמירת כל הקיטים
         public void Save()
         {

@@ -15,19 +15,19 @@ namespace DAL
             string sql;
             if (Tmp.ResearchId == -1)
             {
-                sql = $"insert into Researchs(ResearchId,ResearchName,ResearchDate,ResearchDesc,ResearchDateReciving,Conclusions) " +
-                         $"values(@ResearchId,@ResearchName,@ResearchDate,@ResearchDesc,@ResearchDateReciving,@Conclusions)";
+                sql = $"insert into Researchs(ResearchName,ResearchDate,ResearchDesc,ResearchDateReciving,Conclusions) " +
+                         $"values(@ResearchName,@ResearchDate,@ResearchDesc,@ResearchDateReciving,@Conclusions)";
             }
             else
             {
                 sql = $"Update Researchs set " +
-                    $"ResearchId=@ResearchId," +
+                    
                     $"ResearchName=@ResearchName," +
                     $"ResearchDate=@ResearchDate," +
                     $"ResearchDesc=@ResearchDesc," +
                     $"ResearchDateReciving=@ResearchDateReciving," +
                 
-                   $"Conclusions=@Conclusions,  Where ResearchId = @ResearchId";
+                   $"Conclusions=@Conclusions  Where ResearchId = @ResearchId";
 
 
             }
@@ -39,12 +39,14 @@ namespace DAL
             {
                 ResearchId = Tmp.ResearchId,
                 ResearchName = Tmp.ResearchName,
+                
                 ResearchDate = Tmp.ResearchDate,
                 ResearchDesc = Tmp.ResearchDesc,
-                ResearchDateReciving = Tmp.ResearchDateReceipt,
-                Conclusions = Tmp.ResearchConclusion,
-                
-                
+                ResearchDateReciving = Tmp.ResearchDateReciving,
+                Conclusions = Tmp.Conclusions,
+
+
+
             };
 
 
@@ -57,7 +59,7 @@ namespace DAL
 
             if (Tmp.ResearchId == -1)
             {
-                sql = "$=Select max(Researchs) from Researchs where ResearchName=N'{ResearchName}'";
+                sql = $"Select max(ResearchId) from Researchs where ResearchName=N'{Tmp.ResearchName}'";
                 Tmp.ResearchId = (int)Db.ExecuteScalar(sql);
             }
             Db.Close();
@@ -68,7 +70,7 @@ namespace DAL
         public static List<Research> GetAll()
         {
             List<Research> ResearchList = new List<Research>();
-            string Sql = "Select * from Research";
+            string Sql = "Select * from Researchs";
             DBcontext Db = new DBcontext();
             DataTable Dt = Db.Execute(Sql);
             for (int i = 0; i < Dt.Rows.Count; i++)
@@ -79,8 +81,8 @@ namespace DAL
                    ResearchName = Dt.Rows[i]["ResearchName"].ToString(),
                    ResearchDate = Dt.Rows[i]["ResearchDate"].ToString(),
                    ResearchDesc = Dt.Rows[i]["ResearchDesc"].ToString(),
-                   ResearchDateReceipt = Dt.Rows[i]["ResearchDateReciving"].ToString(),
-                   ResearchConclusion = Dt.Rows[i]["Conclusions"].ToString(),
+                   ResearchDateReciving = Dt.Rows[i]["ResearchDateReciving"].ToString(),
+                   Conclusions = Dt.Rows[i]["Conclusions"].ToString(),
                     
                    
 
@@ -105,8 +107,8 @@ namespace DAL
                     ResearchName = Dt.Rows[0]["ResearchName"].ToString(),
                     ResearchDate = Dt.Rows[0]["ResearchDate"].ToString(),
                     ResearchDesc = Dt.Rows[0]["ResearchDesc"].ToString(),
-                   ResearchDateReceipt = Dt.Rows[0]["ResearchDateReciving"].ToString(),
-                    ResearchConclusion = Dt.Rows[0]["Conclusions"].ToString(),
+                   ResearchDateReciving = Dt.Rows[0]["ResearchDateReciving"].ToString(),
+                    Conclusions = Dt.Rows[0]["Conclusions"].ToString(),
                     
 
                 };
@@ -117,7 +119,7 @@ namespace DAL
         }
         public static int DeleteById(int Id)
         {
-            string Sql = $"Delete from  Research Where ResearchId = {Id}";
+            string Sql = $"Delete from  Researchs Where ResearchId = {Id}";
             DBcontext Db = new DBcontext();
             int Total = Db.ExecuteNonQuery(Sql);
             Db.Close();

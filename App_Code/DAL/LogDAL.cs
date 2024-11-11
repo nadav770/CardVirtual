@@ -15,18 +15,18 @@ namespace DAL
             string sql;
             if (Tmp.LogId == -1)
             {
-                sql = $"insert into Diary(DiaryId,TimeAction,DiaryTime,DueIn,Diary) " +
-                         $"values(@DiaryId,@TimeAction,@DiaryTime,@DueIn,@Diary)";
+                sql = $"insert into Log (TimeAction,LogTime,DueIn,LogRemarks) " +
+                         $"values(@TimeAction,@LogTime,@DueIn,@LogRemarks)";
             }
             else
             {
-                sql = $"Update Diary set " +
-                    $"DiaryId=@DiaryId," +
+                sql = $"Update LogRemarks set " +
+
                     $"TimeAction=@TimeAction," +
-                    $"DiaryTime=@DiaryTime," +
+                    $"LogTime=@LogTime," +
                     $"DueIn=@DueIn," +
-                   
-                    $"Diary=@Diary,  Where DiaryId = @DiaryId";
+                    $"LogRemarks=@LogRemarks  Where LogId = @LogId";
+
 
 
             }
@@ -36,11 +36,11 @@ namespace DAL
             var obj = new
 
             {
-                DiaryId = Tmp.LogId,
+                LogId = Tmp.LogId,
                 TimeAction = Tmp.TimeAction,
-                DiaryTime = Tmp.LogTime,
+                LogTime = Tmp.LogTime,
                 DueIn = Tmp.DueIn,
-                Diary = Tmp.DiaryRemarks,
+                LogRemarks = Tmp.LogRemarks,
                 
             };
 
@@ -54,7 +54,7 @@ namespace DAL
 
             if (Tmp.LogId == -1)
             {
-                sql = "$=Select max(DiaryId) from Diary where DiaryTime=N'{DiaryTime}'";
+                sql = $"Select max(LogId) from Log where TimeAction =N'{Tmp.TimeAction}'";
                 Tmp.LogId = (int)Db.ExecuteScalar(sql);
             }
             Db.Close();
@@ -65,18 +65,18 @@ namespace DAL
         public static List<Log> GetAll()
         {
             List<Log> LogList = new List<Log>();
-            string Sql = "Select * from Diary";
+            string Sql = "Select * from Log";
             DBcontext Db = new DBcontext();
             DataTable Dt = Db.Execute(Sql);
             for (int i = 0; i < Dt.Rows.Count; i++)
             {
                 Log tmp = new Log()
                 {
-                    LogId = int.Parse(Dt.Rows[i]["DiaryId"].ToString()),
-                    TimeAction = DateTime.Parse( Dt.Rows[i]["TimeAction"].ToString()),
-                    LogTime = Dt.Rows[i]["DiaryTime"].ToString(),
+                    LogId = int.Parse(Dt.Rows[i]["LogId"].ToString()),
+                    TimeAction =  Dt.Rows[i]["TimeAction"].ToString(),
+                    LogTime = Dt.Rows[i]["LogTime"].ToString(),
                     DueIn = Dt.Rows[i]["DueIn"].ToString(),
-                    DiaryRemarks = Dt.Rows[i]["Diary"].ToString(),
+                    LogRemarks = Dt.Rows[i]["LogRemarks"].ToString(),
                    
 
 
@@ -89,18 +89,18 @@ namespace DAL
         public static Log GetById(int Id)
         {
             Log tmp = null;
-            string Sql = $"Select * from Diary Where DiaryId = {Id}";
+            string Sql = $"Select * from Log Where LogId = {Id}";
             DBcontext Db = new DBcontext();
             DataTable Dt = Db.Execute(Sql);
             if (Dt.Rows.Count > 0)
             {
                 tmp = new Log()
                 {
-                    LogId = int.Parse(Dt.Rows[0]["DiaryId"].ToString()),
-                    TimeAction = DateTime.Parse( Dt.Rows[0]["TimeAction"].ToString()),
-                    LogTime = Dt.Rows[0]["DiaryTime"].ToString(),
+                    LogId = int.Parse(Dt.Rows[0]["LogId"].ToString()),
+                    TimeAction =  Dt.Rows[0]["TimeAction"].ToString(),
+                    LogTime = Dt.Rows[0]["LogTime"].ToString(),
                     DueIn = Dt.Rows[0]["DueIn"].ToString(),
-                    DiaryRemarks = Dt.Rows[0]["Diary"].ToString(),
+                    LogRemarks = Dt.Rows[0]["LogRemarks"].ToString(),
                     
 
                 };
@@ -111,7 +111,7 @@ namespace DAL
         }
         public static int DeleteById(int Id)
         {
-            string Sql = $"Delete from  Diary Where DiaryId = {Id}";
+            string Sql = $"Delete from  Log Where LogId = {Id}";
             DBcontext Db = new DBcontext();
             int Total = Db.ExecuteNonQuery(Sql);
             Db.Close();

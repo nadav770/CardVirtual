@@ -15,20 +15,19 @@ namespace DAL
             string sql;
             if (Tmp.StockKitId == -1)
             {
-                sql = $"insert into StockKits(StockKitId,ExtendedDescription,JobId,DateIn,DueDate,mude) " +
-                         $"values(@StockKitId,@ExtendedDescription,@JobId,@DateIn,@DueDate,@mude)";
+                sql = $"insert into StockKits(ExtendedDescription,JobId,DateIn,DueDate,mude) " +
+                         $"values(@ExtendedDescription,@JobId,@DateIn,@DueDate,@mude)";
             }
             else
             {
                 sql = $"Update StockKits set " +
-                    $"StockKitId=@StockKitId," +
-                    $"ExtendedDescription=@ExtendedDescription," +
-                    $"JobId=@JobId," +
-                    $"DateIn=@DateIn," +
-                    $"DueDate=@DueDate," +
-                    
-                    
-                    $"mude=@mude,  Where StockKitId = @StockKitId";
+                      $"ExtendedDescription=@ExtendedDescription," +
+                      $"JobId=@JobId," +
+                      $"DateIn=@DateIn," +
+                      $"DueDate=@DueDate," +
+                      $"mude=@mude  Where StockKitId=@StockKitId";
+                 
+
 
 
             }
@@ -43,7 +42,7 @@ namespace DAL
                 JobId = Tmp.JobId,
                 DateIn = Tmp.DateIn,
                 DueDate = Tmp.DueDate,
-                mude = Tmp.StockKitStatus,
+                mude = Tmp.mude,
 
 
             };
@@ -58,7 +57,7 @@ namespace DAL
 
             if (Tmp.StockKitId == -1)
             {
-                sql = "$=Select max(StockKitId) from StockKits where ExtendedDescription=N'{ExtendedDescription}'";
+                sql = $"Select max(StockKitId) from StockKits where ExtendedDescription=N'{Tmp.ExtendedDescription}'";
                 Tmp.StockKitId = (int)Db.ExecuteScalar(sql);
             }
             Db.Close();
@@ -69,19 +68,19 @@ namespace DAL
         public static List<StockKit> GetAll()
         {
             List<StockKit> StockKitList = new List<StockKit>();
-            string Sql = "Select * from Kits";
+            string Sql = "Select * from StockKits";
             DBcontext Db = new DBcontext();
             DataTable Dt = Db.Execute(Sql);
             for (int i = 0; i < Dt.Rows.Count; i++)
             {
                 StockKit tmp = new StockKit()
                 {
-                    StockKitId = int.Parse(Dt.Rows[i]["K_Id"].ToString()),
+                    StockKitId = int.Parse(Dt.Rows[i]["StockKitId"].ToString()),
                     ExtendedDescription = Dt.Rows[i]["ExtendedDescription"].ToString(),
                     JobId = int.Parse(Dt.Rows[i]["JobId"].ToString()),
                     DateIn = Dt.Rows[i]["DateIn"].ToString(),
                     DueDate = Dt.Rows[i]["DueDate"].ToString(),
-                    StockKitStatus = bool.Parse(Dt.Rows[i][" mude"].ToString()),
+                    mude = int.Parse(Dt.Rows[i]["mude"].ToString()),
                     
 
                 };
@@ -105,7 +104,7 @@ namespace DAL
                     JobId = int.Parse(Dt.Rows[0]["JobId"].ToString()),
                     DateIn = Dt.Rows[0]["DateIn"].ToString(),
                     DueDate = Dt.Rows[0]["DueDate"].ToString(),
-                    StockKitStatus =bool.Parse( Dt.Rows[0][" mude"].ToString()),
+                    mude =int.Parse( Dt.Rows[0]["mude"].ToString()),
                     
                 };
 

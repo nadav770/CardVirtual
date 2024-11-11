@@ -1,9 +1,9 @@
 ﻿using DAL;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Web;
-using Controller;
+
 
 
 
@@ -18,7 +18,7 @@ namespace BLL
         public string KitBarcode { get; set; }
         public string KitDesc { get; set; }
         public string KitImage { get; set; }
-        public int Cid { get; set; }
+        public int CustomerId { get; set; }
         public int KitNumOfParts { get; set; }
 
         public int KitStatus { get; set; }

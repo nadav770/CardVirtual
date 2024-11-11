@@ -12,20 +12,20 @@ namespace DAL
         public static void Save(StockPart Tmp)
         {
             string sql;
-            if (Tmp.StockPartId == -1)
+            if (Tmp.StockPartsId == -1)
             {
-                sql = $"insert into Kits(StockPartId,StockPartsDateReiciving,SeriesActionPart,StockPartsStatus,StockPartsDateEnd) " +
-                         $"values(@StockPartId,@StockPartsDateReiciving,@SeriesActionPart,@StockPartsStatus,@StockPartsDateEnd)";
+                sql = $"insert into StockParts(StockPartsDateReiciving,SeriesActionPart,StockPartsStatus,StockPartsDateEnd) " +
+                         $"values(@StockPartsDateReiciving,@SeriesActionPart,@StockPartsStatus,@StockPartsDateEnd)";
             }
             else
             {
                 sql = $"Update StockParts set " +
-                    $"StockPartId=@StockPartId," +
+                   
                     $"StockPartsDateReiciving=@StockPartsDateReiciving," +
                     $"SeriesActionPart=@SeriesActionPart," +
                     $"StockPartsStatus=@StockPartsStatus," +
 
-                    $"StockPartsDateEnd=@StockPartsDateEnd,   Where StockPartId = @StockPartId";
+                    $"StockPartsDateEnd=@StockPartsDateEnd   Where StockPartsId = @StockPartsId";
 
 
             }
@@ -35,11 +35,11 @@ namespace DAL
             var obj = new
 
             {
-                StockPartId = Tmp.StockPartId,
-                StockPartsDateReiciving = Tmp.StockPartDateIn,
+                StockPartsId = Tmp.StockPartsId,
+                StockPartsDateReiciving = Tmp.StockPartsDateReiciving,
                 SeriesActionPart = Tmp.SeriesActionPart,
-                StockPartsStatus = Tmp.StockPartStatus,
-                StockPartsDateEnd = Tmp.StockPartDateOut,
+                StockPartsStatus = Tmp.StockPartsStatus ,
+                StockPartsDateEnd = Tmp.StockPartsDateEnd,
                 
             };
 
@@ -51,10 +51,10 @@ namespace DAL
             Db.ExecuteNonQuery(sql, lstParam);
 
 
-            if (Tmp.StockPartId == -1)
+            if (Tmp.StockPartsId == -1)
             {
-                sql = "$=Select max(StockPartId) from StockParts where StockPartsDateReiciving=N'{StockPartDateReiciving}'";
-                Tmp.StockPartId = (int)Db.ExecuteScalar(sql);
+                sql = $"Select max(StockPartsId) from StockParts where StockPartsDateReiciving=N'{Tmp.StockPartsDateReiciving}'";
+                Tmp.StockPartsId = (int)Db.ExecuteScalar(sql);
             }
             Db.Close();
 
@@ -71,11 +71,11 @@ namespace DAL
             {
                 StockPart tmp = new StockPart()
                 {
-                    StockPartId = int.Parse(Dt.Rows[i]["StockPartId"].ToString()),
-                    StockPartDateIn = Dt.Rows[i]["StockPartsDateReiciving"].ToString(),
+                    StockPartsId = int.Parse(Dt.Rows[i]["StockPartsId"].ToString()),
+                    StockPartsDateReiciving = Dt.Rows[i]["StockPartsDateReiciving"].ToString(),
                     SeriesActionPart = Dt.Rows[i]["SeriesActionPart"].ToString(),
-                    StockPartStatus = bool.Parse(Dt.Rows[i]["StockPartsStatus"].ToString()),
-                    StockPartDateOut = Dt.Rows[i]["StockPartsDateEnd"].ToString(),
+                    StockPartsStatus  = int.Parse(Dt.Rows[i]["StockPartsStatus"].ToString()),
+                    StockPartsDateEnd = Dt.Rows[i]["StockPartsDateEnd"].ToString(),
                    
 
 
@@ -88,18 +88,18 @@ namespace DAL
         public static StockPart GetById(int Id)
         {
             StockPart tmp = null;
-            string Sql = $"Select * from StockParts Where StockPartId = {Id}";
+            string Sql = $"Select * from StockParts Where StockPartsId = {Id}";
             DBcontext Db = new DBcontext();
             DataTable Dt = Db.Execute(Sql);
             if (Dt.Rows.Count > 0)
             {
                 tmp = new StockPart()
                 {
-                    StockPartId = int.Parse(Dt.Rows[0]["StockPartId"].ToString()),
-                    StockPartDateIn = Dt.Rows[0]["StockPartsDateReiciving"].ToString(),
+                    StockPartsId = int.Parse(Dt.Rows[0]["StockPartsId"].ToString()),
+                    StockPartsDateReiciving = Dt.Rows[0]["StockPartsDateReiciving"].ToString(),
                     SeriesActionPart = Dt.Rows[0]["SeriesActionPart"].ToString(),
-                    StockPartStatus = bool.Parse(Dt.Rows[0]["StockPartsStatus"].ToString()),
-                    StockPartDateOut = Dt.Rows[0]["StockPartsDateEnd"].ToString(),
+                    StockPartsStatus  = int.Parse(Dt.Rows[0]["StockPartsStatus"].ToString()),
+                    StockPartsDateEnd = Dt.Rows[0]["StockPartsDateEnd"].ToString(),
                     
 
                 };
@@ -110,7 +110,7 @@ namespace DAL
         }
         public static int DeleteById(int Id)
         {
-            string Sql = $"Delete from  StockParts Where StockPartId = {Id}";
+            string Sql = $"Delete from  StockParts Where StockPartsId = {Id}";
             DBcontext Db = new DBcontext();
             int Total = Db.ExecuteNonQuery(Sql);
             Db.Close();

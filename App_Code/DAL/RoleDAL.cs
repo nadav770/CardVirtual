@@ -15,16 +15,16 @@ namespace DAL
             string sql;
             if (Tmp.RoleId == -1)
             {
-                sql = $"insert into Roles(RoleId,RoleName) " +
-                         $"values(@RoleId,@RoleName)";
+                sql = $"insert into Roles(RoleName) " +
+                         $"values(@RoleName)";
             }
             else
             {
                 sql = $"Update Roles set " +
-                    $"RoleId=@RoleId," +
+                    
                     
                    
-                    $"RoleName=@RoleName,  Where RoleId = @RoleId";
+                    $"RoleName=@RoleName  Where RoleId = @RoleId";
 
 
             }
@@ -49,7 +49,7 @@ namespace DAL
 
             if (Tmp.RoleId == -1)
             {
-                sql = "$=Select max(RoleId) from Roles where RoleName=N'{RoleName}'";
+                sql = $"Select max(RoleId) from Roles where RoleName=N'{Tmp.RoleName}'";
                 Tmp.RoleId = (int)Db.ExecuteScalar(sql);
             }
             Db.Close();
@@ -68,7 +68,7 @@ namespace DAL
                 Role tmp = new Role()
                 {
                     RoleId = int.Parse(Dt.Rows[i]["RoleId"].ToString()),
-                    RoleName = Dt.Rows[i][" RoleName"].ToString(),
+                    RoleName = Dt.Rows[i]["RoleName"].ToString(),
                     
 
 
@@ -89,7 +89,7 @@ namespace DAL
                 tmp = new Role()
                 {
                     RoleId = int.Parse(Dt.Rows[0]["RoleId"].ToString()),
-                    RoleName = Dt.Rows[0][" RoleName"].ToString(),
+                    RoleName = Dt.Rows[0]["RoleName"].ToString(),
                     
 
                 };
