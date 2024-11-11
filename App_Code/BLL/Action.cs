@@ -10,7 +10,7 @@ namespace BLL
     {
         public int ActionId { get; set; }
         public string ActionName { get; set; }
-        
+        public string ActכionDesc { get; set; }//להסיר
         public string ActionDesc { get; set; }
         public int Did { get; set; }
         //שמירת כל הפעולות

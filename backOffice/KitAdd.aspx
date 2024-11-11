@@ -4,14 +4,14 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainCnt" runat="server">
        <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">הוספת קיט</h3>
+                    <h3 class="content-header-title">הוספת מיוחד קיט</h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="default.aspx">דף הבית</a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="#">תשלומים</a>
-                                </li>
+                                </li> 
                                 <li class="breadcrumb-item active">הוספת קיט
                                 </li>
                             </ol>
@@ -81,12 +81,12 @@
                                     <div class="form-group">
                                         <select name="paymentMethod" class="form-control">
                                             <option value="select">Select Payment Method</option>
-                                            <option value="cash">Cash</option>
-                                            <option value="credit">Credit Card</option>
-                                            <option value="debit">Debit Card</option>
-                                            <option value="cheque">Cheque</option>
-                                            <option value="netbanking">Net Banking</option>
-                                            <option value="insaurance">Insaurance</option>
+                                            <option value="cash">ניקוי חול</option>
+                                            <option value="credit">חומצות</option>
+                                            <option value="debit">qc</option>
+                                            <option value="cheque">אריזה</option>
+                                            <option value="netbanking">מוכן למשלוח</option>
+                                            <option value="insaurance">נשלח</option>
                                         </select>
                                     </div>
                                 </div>
