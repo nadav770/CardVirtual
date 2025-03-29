@@ -15,22 +15,23 @@ namespace DAL
             string sql;
             if (Tmp.ResearchId == -1)
             {
-                sql = $"insert into Researchs(ResearchName,ResearchDate,ResearchDesc,ResearchDateReciving,Conclusions) " +
-                         $"values(@ResearchName,@ResearchDate,@ResearchDesc,@ResearchDateReciving,@Conclusions)";
+                sql = $"insert into Researchs(ResearchName,ResearchDate,ResearchDesc,ResearchDateReceiving,Conclusions) " +
+                         $"values(@ResearchName,@ResearchDate,@ResearchDesc,@ResearchDateReceiving,@Conclusions)";
             }
             else
             {
                 sql = $"Update Researchs set " +
-                    
-                    $"ResearchName=@ResearchName," +
-                    $"ResearchDate=@ResearchDate," +
-                    $"ResearchDesc=@ResearchDesc," +
-                    $"ResearchDateReciving=@ResearchDateReciving," +
-                
-                   $"Conclusions=@Conclusions  Where ResearchId = @ResearchId";
-
-
+                      $"ResearchName=@ResearchName," +
+                      $"ResearchDate=@ResearchDate," +
+                      $"ResearchDesc=@ResearchDesc," +
+                      $"ResearchDateReceiving=@ResearchDateReceiving," +
+                      $"Conclusions=@Conclusions  Where ResearchId=@ResearchId";
             }
+
+
+
+
+           
 
             //קריאת מסד הנתונים ע''י מחרוזת ומשתנה יחוס מוסג var
             DBcontext Db = new DBcontext();
@@ -40,9 +41,9 @@ namespace DAL
                 ResearchId = Tmp.ResearchId,
                 ResearchName = Tmp.ResearchName,
                 
-                ResearchDate = Tmp.ResearchDate,
+                ResearchDate = DateTime.Now,
                 ResearchDesc = Tmp.ResearchDesc,
-                ResearchDateReciving = Tmp.ResearchDateReciving,
+                ResearchDateReceiving = Tmp.ResearchDateReceiving,
                 Conclusions = Tmp.Conclusions,
 
 
@@ -79,9 +80,9 @@ namespace DAL
                 {
                    ResearchId = int.Parse(Dt.Rows[i]["ResearchId"].ToString()),
                    ResearchName = Dt.Rows[i]["ResearchName"].ToString(),
-                   ResearchDate = Dt.Rows[i]["ResearchDate"].ToString(),
+                   ResearchDate = DateTime.Parse(Dt.Rows[i]["ResearchDate"].ToString()),
                    ResearchDesc = Dt.Rows[i]["ResearchDesc"].ToString(),
-                   ResearchDateReciving = Dt.Rows[i]["ResearchDateReciving"].ToString(),
+                   ResearchDateReceiving = Dt.Rows[i]["ResearchDateReceiving"].ToString(),
                    Conclusions = Dt.Rows[i]["Conclusions"].ToString(),
                     
                    
@@ -105,9 +106,9 @@ namespace DAL
                 {
                     ResearchId = int.Parse(Dt.Rows[0]["ResearchId"].ToString()),
                     ResearchName = Dt.Rows[0]["ResearchName"].ToString(),
-                    ResearchDate = Dt.Rows[0]["ResearchDate"].ToString(),
+                    ResearchDate = DateTime.Parse(Dt.Rows[0]["ResearchDate"].ToString()),
                     ResearchDesc = Dt.Rows[0]["ResearchDesc"].ToString(),
-                   ResearchDateReciving = Dt.Rows[0]["ResearchDateReciving"].ToString(),
+                    ResearchDateReceiving = Dt.Rows[0]["ResearchDateReceiving"].ToString(),
                     Conclusions = Dt.Rows[0]["Conclusions"].ToString(),
                     
 

@@ -15,9 +15,9 @@ namespace BLL
        
         public string CustomerContactPerson { get; set; }//איש קשר
         public string CustomerContactPersonPhone { get; set; }//טלפון של איש קשר 
-        public string CustomerDateStart { get; set; }//תאריך תחילת עבודה
+        public DateTime CustomerDateStart { get; set; }//תאריך תחילת עבודה
        public string Remarks { get; set; }
-        public int CustomerStatus { get; set; }//סטטוס 
+        public bool CustomerStatus { get; set; }//סטטוס 
         public string CustomerMail { get; set; }//מייל של הלקוח
         //שמירת כל הלקוחות
         public void Save()

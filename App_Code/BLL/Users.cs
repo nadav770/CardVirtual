@@ -12,9 +12,9 @@ namespace BLL
         public string UserName { get; set; }
         public string Pass { get; set; }
         public int AthoUse { get; set; }
-        public string RegisterDate { get; set; }
-        public int Imaige { get; set; }
-        public int UserStatus { get; set; }
+        public DateTime RegisterDate { get; set; }
+        
+        public bool UserStatus { get; set; }
         public string UserEmail { get; set; }
         //שמירת כל הקיטים
         public void Save()
@@ -37,6 +37,10 @@ namespace BLL
         public static int DeleteById(int Id)
         {
             return UsersDAL.DeleteById(Id);
+        }
+        public void  CheckLogin()
+        {
+             UsersDAL.CheckLogin(this);
         }
 
     }

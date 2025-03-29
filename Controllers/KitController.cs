@@ -22,7 +22,7 @@ namespace CardFlow.Controller
             var res = new
             {
                 status = 200,
-                error = "",
+                error = "no erors",
                 data = LstKits
             };
             return res;

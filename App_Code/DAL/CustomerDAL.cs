@@ -30,7 +30,7 @@ namespace DAL
                     $"CustomerContactPersonPhone=@CustomerContactPersonPhone," +
                     $"CustomerDateStart=@CustomerDateStart," +
                     $"CustomerStatus=@CustomerStatus,"+
-                    $"CustomerMail=@CustomerMail"+
+                    $"CustomerMail=@CustomerMail,"+
                     $"Remarks=@Remarks   Where CustomerId = @CustomerId";
 
 
@@ -47,7 +47,7 @@ namespace DAL
                 CustomerPhone = Tmp.CustomerPhone,
                 CustomerContactPerson = Tmp.CustomerContactPerson,
                 CustomerContactPersonPhone = Tmp.CustomerContactPersonPhone,
-                CustomerDateStart = Tmp.CustomerDateStart,
+                CustomerDateStart = DateTime.Now,
                 Remarks = Tmp.Remarks,
                 CustomerStatus=Tmp.CustomerStatus,
                 CustomerMail=Tmp.CustomerMail
@@ -82,14 +82,14 @@ namespace DAL
                 Customer tmp = new Customer()
                 {
                     CustomerId = int.Parse(Dt.Rows[i]["CustomerId"].ToString()),
-                    CustomerName= Dt.Rows[i][" CustomerName"].ToString(),
+                    CustomerName= Dt.Rows[i]["CustomerName"].ToString(),
                     CustomerAdress = Dt.Rows[i]["CustomerAdress"].ToString(),
                     CustomerPhone = Dt.Rows[i]["CustomerPhone"].ToString(),
                     CustomerContactPerson = Dt.Rows[i]["CustomerContactPerson"].ToString(),
                     CustomerContactPersonPhone = Dt.Rows[i]["CustomerContactPersonPhone"].ToString(),
-                    CustomerDateStart = Dt.Rows[i]["CustomerDateStart"].ToString(),
+                    CustomerDateStart = DateTime.Parse(Dt.Rows[i]["CustomerDateStart"].ToString()),
                     Remarks = Dt.Rows[i]["Remarks"].ToString(),
-                    CustomerStatus = int.Parse(Dt.Rows[i]["CustomerStatus"].ToString()),
+                    CustomerStatus = bool.Parse(Dt.Rows[i]["CustomerStatus"].ToString()),
                     CustomerMail = Dt.Rows[i]["CustomerMail"].ToString()
 
                 };
@@ -109,13 +109,13 @@ namespace DAL
                 tmp = new Customer()
                 {
                     CustomerId = int.Parse(Dt.Rows[0]["CustomerId"].ToString()),
-                    CustomerName = Dt.Rows[0][" CustomerName"].ToString(),
+                    CustomerName = Dt.Rows[0]["CustomerName"].ToString(),
                     CustomerAdress = Dt.Rows[0]["CustomerAdress"].ToString(),
                     CustomerPhone = Dt.Rows[0]["CustomerPhone"].ToString(),
                     CustomerContactPerson= Dt.Rows[0]["CustomerContactPerson"].ToString(),
                     CustomerContactPersonPhone = Dt.Rows[0]["CustomerContactPersonPhone"].ToString(),
-                    CustomerDateStart = Dt.Rows[0]["CustomerDateStart"].ToString(),
-                    CustomerStatus = int.Parse(Dt.Rows[0]["CustomerStatus"].ToString()),
+                    CustomerDateStart = DateTime.Parse(Dt.Rows[0]["CustomerDateStart"].ToString()),
+                    CustomerStatus = bool.Parse(Dt.Rows[0]["CustomerStatus"].ToString()),
                     Remarks = Dt.Rows[0]["Remarks"].ToString(),
                     CustomerMail = Dt.Rows[0]["CustomerMail"].ToString()
 

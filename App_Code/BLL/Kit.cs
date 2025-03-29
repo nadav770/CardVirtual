@@ -21,7 +21,8 @@ namespace BLL
         public int CustomerId { get; set; }
         public int KitNumOfParts { get; set; }
 
-        public int KitStatus { get; set; }
+        public bool KitStatus { get; set; }
+        public DateTime RegisterDate { get; set; }
         //שמירת כל הקיטים
         public void Save()
         {

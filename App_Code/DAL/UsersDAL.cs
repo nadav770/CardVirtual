@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using BLL;
@@ -15,8 +16,8 @@ namespace DAL
             string sql;
             if (Tmp.UserId == -1)
             {
-                sql = $"insert into Users(UserName,Pass,AthoUse,RegisterDate,Imaige,UserStatus,UserEmail) " +
-                         $"values(@UserName,@Pass,@AthoUse,@RegisterDate,@Imaige,@UserStatus,@UserEmail)";
+                sql = $"insert into Users(UserName,Pass,AthoUse,RegisterDate,UserStatus,UserEmail) " +
+                         $"values(@UserName,@Pass,@AthoUse,@RegisterDate,@UserStatus,@UserEmail)";
             }
             else
             {
@@ -26,7 +27,7 @@ namespace DAL
                     $"Pass=@Pass," +
                     $"AthoUse=@AthoUse," +
                     $"RegisterDate=@RegisterDate," +
-                    $"Imaige=@Imaige," +
+                    
                     
                     $"UserStatus=@UserStatus, " +
                     $"UserEmail=@UserEmail Where UserId = @UserId";
@@ -43,8 +44,8 @@ namespace DAL
                 UserName = Tmp.UserName,
                 Pass = Tmp.Pass,
                 AthoUse = Tmp.AthoUse,
-                RegisterDate = Tmp.RegisterDate,
-                Imaige = Tmp.Imaige,
+                RegisterDate = DateTime.Now,
+                
                 UserStatus = Tmp.UserStatus,
                 UserEmail=Tmp.UserEmail,
 
@@ -82,9 +83,9 @@ namespace DAL
                     UserName = Dt.Rows[i]["UserName"].ToString(),
                     Pass = Dt.Rows[i]["Pass"].ToString(),
                     AthoUse = int.Parse(Dt.Rows[i]["AthoUse"].ToString()),
-                    RegisterDate = Dt.Rows[i]["RegisterDate"].ToString(),
-                    Imaige =int.Parse( Dt.Rows[i]["Imaige"].ToString()),
-                    UserStatus =int.Parse( Dt.Rows[i]["UserStatus"].ToString()),
+                    RegisterDate =  DateTime.Parse(Dt.Rows[i]["RegisterDate"].ToString()),
+                    
+                    UserStatus =bool.Parse( Dt.Rows[i]["UserStatus"].ToString()),
                     UserEmail = Dt.Rows[i]["UserEmail"].ToString(),
 
 
@@ -109,9 +110,9 @@ namespace DAL
                     UserName = Dt.Rows[0]["UserName"].ToString(),
                     Pass = Dt.Rows[0]["Pass"].ToString(),
                     AthoUse =int.Parse( Dt.Rows[0]["AthoUse"].ToString()),
-                   
-                    Imaige = int.Parse(Dt.Rows[0]["Imaige"].ToString()),
-                    UserStatus = int.Parse(Dt.Rows[0]["UserStatus"].ToString()),
+                    RegisterDate = DateTime.Parse(Dt.Rows[0]["RegisterDate"].ToString()),
+                    
+                    UserStatus = bool.Parse(Dt.Rows[0]["UserStatus"].ToString()),
                     UserEmail = Dt.Rows[0]["UserEmail"].ToString(),
 
 
@@ -120,6 +121,41 @@ namespace DAL
             }
             Db.Close();
             return tmp;
+        }
+        
+             public static void  CheckLogin(Users tmp)
+        {
+            string Sql = "SELECT * FROM Users WHERE UserName = @UserName AND Pass = @Pass";
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                new SqlParameter("@UserName",tmp.UserName),
+                new SqlParameter("@Pass", tmp.Pass)
+            };
+
+          
+           
+            DBcontext Db = new DBcontext();
+            DataTable Dt = Db.ExecuteParam(Sql,parameters);
+            if (Dt.Rows.Count > 0)
+            {
+
+
+                tmp.UserId = int.Parse(Dt.Rows[0]["UserId"].ToString());
+                    
+                    
+                    tmp.AthoUse = int.Parse(Dt.Rows[0]["AthoUse"].ToString());
+                    tmp.RegisterDate = DateTime.Parse(Dt.Rows[0]["RegisterDate"].ToString());
+
+                   tmp.UserStatus = bool.Parse(Dt.Rows[0]["UserStatus"].ToString());
+                   tmp.UserEmail = Dt.Rows[0]["UserEmail"].ToString();
+
+
+                
+
+            }
+            Db.Close();
+            
         }
         public static int DeleteById(int Id)
         {

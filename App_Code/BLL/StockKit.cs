@@ -9,11 +9,12 @@ namespace BLL
     public class StockKit
     {
         public int StockKitId { get; set; }
+        public int KitId { get; set; }
         public string ExtendedDescription { get; set; }
         public int JobId { get; set; }
         public string DateIn { get; set; }
         public string DueDate { get; set; }
-        public int mude { get; set; }
+        public bool Status { get; set; }
         //שמירת כל הקיטים
         public void Save()
         {

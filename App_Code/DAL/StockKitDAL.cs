@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using BLL;
+using CardVirtual.backOffice;
 using Data;
 
 namespace DAL
@@ -15,17 +16,18 @@ namespace DAL
             string sql;
             if (Tmp.StockKitId == -1)
             {
-                sql = $"insert into StockKits(ExtendedDescription,JobId,DateIn,DueDate,mude) " +
-                         $"values(@ExtendedDescription,@JobId,@DateIn,@DueDate,@mude)";
+                sql = $"insert into StockKits(ExtendedDescription,KitId,JobId,DateIn,DueDate,Status) " +
+                         $"values(@ExtendedDescription,@KitId,@JobId,@DateIn,@DueDate,@Status)";
             }
             else
             {
                 sql = $"Update StockKits set " +
                       $"ExtendedDescription=@ExtendedDescription," +
+                      $"KitId=@KitId,"+
                       $"JobId=@JobId," +
                       $"DateIn=@DateIn," +
                       $"DueDate=@DueDate," +
-                      $"mude=@mude  Where StockKitId=@StockKitId";
+                      $"Status=@Status  Where StockKitId=@StockKitId";
                  
 
 
@@ -39,10 +41,11 @@ namespace DAL
             {
                 StockKitId = Tmp.StockKitId,
                 ExtendedDescription = Tmp.ExtendedDescription,
+                KitId=Tmp.KitId,    
                 JobId = Tmp.JobId,
                 DateIn = Tmp.DateIn,
                 DueDate = Tmp.DueDate,
-                mude = Tmp.mude,
+                Status = Tmp.Status,
 
 
             };
@@ -77,10 +80,11 @@ namespace DAL
                 {
                     StockKitId = int.Parse(Dt.Rows[i]["StockKitId"].ToString()),
                     ExtendedDescription = Dt.Rows[i]["ExtendedDescription"].ToString(),
+                    KitId = int.Parse(Dt.Rows[i]["KitId"].ToString()),
                     JobId = int.Parse(Dt.Rows[i]["JobId"].ToString()),
                     DateIn = Dt.Rows[i]["DateIn"].ToString(),
                     DueDate = Dt.Rows[i]["DueDate"].ToString(),
-                    mude = int.Parse(Dt.Rows[i]["mude"].ToString()),
+                    Status = bool.Parse(Dt.Rows[i]["Status"].ToString()),
                     
 
                 };
@@ -101,10 +105,11 @@ namespace DAL
                 {
                     StockKitId = int.Parse(Dt.Rows[0]["StockKitId"].ToString()),
                     ExtendedDescription = Dt.Rows[0]["ExtendedDescription"].ToString(),
+                    KitId = int.Parse(Dt.Rows[0]["KitId"].ToString()),
                     JobId = int.Parse(Dt.Rows[0]["JobId"].ToString()),
                     DateIn = Dt.Rows[0]["DateIn"].ToString(),
                     DueDate = Dt.Rows[0]["DueDate"].ToString(),
-                    mude =int.Parse( Dt.Rows[0]["mude"].ToString()),
+                    Status = bool.Parse( Dt.Rows[0]["Status"].ToString()),
                     
                 };
 

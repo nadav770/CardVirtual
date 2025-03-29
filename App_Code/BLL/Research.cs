@@ -8,32 +8,32 @@ namespace BLL
 {
     public class Research
     {
-        public int ResearchId { get; set; }
+        public int ResearchId { get; set; }//מזהה
 
-        public string ResearchName { get; set; }
+        public string ResearchName { get; set; }//שם תחקיר 
 
-        public string ResearchDate { get; set; }
-        public string ResearchDesc { get; set; }
-        public string ResearchDateReciving { get; set; }
-        public string Conclusions { get; set; }
-        //שמירת כל הקיטים
+        public DateTime ResearchDate { get; set; }// תאריך
+        public string ResearchDesc { get; set; }// תיאור התחקיר
+        public string ResearchDateReceiving { get; set; }// תאריך המקרה שכתוצאה ממנו נולד התחקיר
+        public string Conclusions { get; set; }// מסקנות
+        //שמירת כל התחקירים
         public void Save()
         {
 
             ResearchDAL.Save(this);
         }
 
-        // פונקציה לקבלת כל הקיטים
+        // פונקציה לקבלת כל התחקירים
         public static List<Research> GetAll()
         {
             return ResearchDAL.GetAll();
         }
-        // פונקציה לקבלת קיט לפי מזהה
+        // פונקציה לקבלת תחקיר לפי מזהה
         public static Research GetById(int Id)
         {
             return ResearchDAL.GetById(Id);
         }
-        //פונקציה למחיקת קיט לפי מזהה
+        //פונקציה למחיקת תחקיר לפי מזהה
         public static int DeleteById(int Id)
         {
             return ResearchDAL.DeleteById(Id);

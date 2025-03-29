@@ -19,10 +19,11 @@ namespace DAL
         public static void Save(Kit Tmp)
         {
             string sql;
+            //וקודם אנחנו שואלים האם הid שלו ==-1 משמע שאין לו id סידורי
             if (Tmp.KitId == -1)                
-            {
-                sql = $"insert into Kits(KitName,KitTag,KitBarcode,KitDesc,KitImage,CustomerId,KitNumOfParts,KitStatus ) " +
-                         $"values(@KitName,@KitTag,@KitBarcode,@KitDesc,@KitImage,@CustomerId,@KitNumOfParts,@KitStatus)";
+            {//אז בעצם מדובר באובייקט חדש שלא קיים בטבלה אז אני פשוט מייצר אותו ע''י שאילתת sql
+                sql = $"insert into Kits(KitName,KitTag,KitBarcode,KitDesc,KitImage,CustomerId,KitNumOfParts,KitStatus,RegisterDate ) " +
+                         $"values(@KitName,@KitTag,@KitBarcode,@KitDesc,@KitImage,@CustomerId,@KitNumOfParts,@KitStatus,@RegisterDate)";
             }
             else
             {
@@ -35,7 +36,8 @@ namespace DAL
                     $"KitImage=@KitImage," +
                     $"CustomerId=@CustomerId," +
                     $"KitNumOfParts=@KitNumOfParts," +
-                     $"KitStatus=@KitStatus    WHERE       KitId = @KitId";
+                     $"KitStatus=@KitStatus," +
+                     $"RegisterDate=@RegisterDate WHERE       KitId = @KitId";
 
 
 
@@ -54,9 +56,10 @@ namespace DAL
                 KitImage = Tmp.KitImage,
                 CustomerId = Tmp.CustomerId,
                 KitNumOfParts = Tmp.KitNumOfParts,
-                KitStatus = Tmp.KitStatus,  
+                KitStatus = Tmp.KitStatus,
+                RegisterDate=DateTime.Now,
             };
-
+            //לאחר כל זאת יצרנו משתנה בשם פרמיטר שיחזיק את כל האובייקט
             var parameters = DBcontext.CreateParameters(obj);
 
 
@@ -67,7 +70,7 @@ namespace DAL
 
             if (Tmp.KitId == -1)
             {
-                sql = $"Select max(KitId) from Kits where KitName=N'{   Tmp.KitName}'";
+                sql = $"Select max(KitId) from Kits where KitName=N'{  Tmp.KitName}'";
                 Tmp.KitId = (int)Db.ExecuteScalar(sql);
             }
             Db.Close();
@@ -94,7 +97,8 @@ namespace DAL
                     KitImage = Dt.Rows[i]["KitImage"].ToString(),
                     CustomerId = int.Parse(Dt.Rows[i]["CustomerId"].ToString()),
                     KitNumOfParts = int.Parse(Dt.Rows[i]["KitNumOfParts"].ToString()),
-                    KitStatus = int.Parse(Dt.Rows[i]["KitStatus"].ToString())
+                    KitStatus = bool.Parse(Dt.Rows[i]["KitStatus"].ToString()),
+                    RegisterDate = DateTime.Parse(Dt.Rows[i]["RegisterDate"].ToString())
 
 
 
@@ -123,8 +127,8 @@ namespace DAL
                     KitImage = Dt.Rows[0]["KitImage"].ToString(),
                     CustomerId = int.Parse(Dt.Rows[0]["CustomerId"].ToString()),
                     KitNumOfParts = int.Parse(Dt.Rows[0]["KitNumOfParts"].ToString()),
-                    KitStatus = int.Parse(Dt.Rows[0]["KitStatus"].ToString()),
-
+                    KitStatus = bool.Parse(Dt.Rows[0]["KitStatus"].ToString()),
+                    RegisterDate = DateTime.Parse(Dt.Rows[0]["RegisterDate"].ToString())
 
 
 

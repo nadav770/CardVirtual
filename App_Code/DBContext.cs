@@ -52,6 +52,27 @@ namespace Data
             return RecCount;
 
         }
+        public DataTable ExecuteParam(string Sql, List<SqlParameter> Lst = null)
+        {
+            DataTable Dt = new DataTable();
+            SqlDataAdapter Da=new SqlDataAdapter();
+
+            Cmd.CommandText = Sql;
+            if (Lst != null)
+            {
+                for (int i = 0; i < Lst.Count; i++)
+                {
+                    Cmd.Parameters.Add(Lst[i]);
+                }
+            }
+            Da.SelectCommand = Cmd;
+            Da.Fill(Dt);
+                
+            
+           
+            return Dt;
+
+        }
         public static List<SqlParameter> CreateParameters(object parametersObject)
         {
             var parameters = new List<SqlParameter>();
@@ -103,6 +124,11 @@ namespace Data
 
 
 
+        }
+
+        internal object ExecuteScalar(string query, List<SqlParameter> parameters)
+        {
+            throw new NotImplementedException();
         }
     }
 }

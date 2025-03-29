@@ -8,9 +8,9 @@ namespace BLL
 {
     public class Department
     {
-        public int DepartmentId { get; set; }
+        public int DepartmentId { get; set; }// מזהה
 
-        public string DepartmentName { get; set; }
+        public string DepartmentName { get; set; }// שם מחלקה 
         //שמירת כל הלקוחות
         public void Save()
         {

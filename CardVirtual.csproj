@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,7 +46,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -87,23 +94,41 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Http, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.3.0\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.3.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -2025,6 +2050,7 @@
     <Content Include="app-assets\images\ico\apple-icon-76.png" />
     <Content Include="app-assets\images\ico\favicon-32.png" />
     <Content Include="app-assets\images\ico\favicon.ico" />
+    <Content Include="app-assets\images\ico\procces.ico" />
     <Content Include="app-assets\images\jqueryui\calendar.png" />
     <Content Include="app-assets\images\jqueryui\ui-anim_basic_16x16.gif" />
     <Content Include="app-assets\images\jqueryui\ui-icons_ffffff_256x240.png" />
@@ -2058,9 +2084,7 @@
     <Content Include="app-assets\images\map\leaflet\images\marker-shadow.png" />
     <Content Include="app-assets\images\pages\fitness-profile.jpg" />
     <Content Include="app-assets\images\pages\fitness-shoes.jpg" />
-    <Content Include="app-assets\images\pages\fitness-slide-1.jpg" />
     <Content Include="app-assets\images\pages\fitness-slide-2.jpg" />
-    <Content Include="app-assets\images\pages\fitness-slide-3.jpg" />
     <Content Include="app-assets\images\pages\signature-scan.png" />
     <Content Include="app-assets\images\pages\ubuntu-type-scale.png" />
     <Content Include="app-assets\images\pages\windows-type-scale.png" />
@@ -2883,6 +2907,7 @@
     <Content Include="app-assets\js\scripts\editors\editor-summernote.min.js" />
     <Content Include="app-assets\js\scripts\editors\editor-tinymce.js" />
     <Content Include="app-assets\js\scripts\editors\editor-tinymce.min.js" />
+    <Content Include="app-assets\js\scripts\Email.js" />
     <Content Include="app-assets\js\scripts\extensions\add-on-drag-drop.js" />
     <Content Include="app-assets\js\scripts\extensions\add-on-drag-drop.min.js" />
     <Content Include="app-assets\js\scripts\extensions\block-ui.js" />
@@ -5631,92 +5656,51 @@
     <Content Include="assets\css\style-rtl.css" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\js\scripts.js" />
-    <Content Include="backOffice\app-chat.html" />
-    <Content Include="backOffice\app-email.html" />
-    <Content Include="backOffice\app-kanban.html" />
-    <Content Include="backOffice\chartjs-advance-charts.html" />
-    <Content Include="backOffice\chartjs-bar-charts.html" />
-    <Content Include="backOffice\chartjs-line-charts.html" />
-    <Content Include="backOffice\chartjs-pie-doughnut-charts.html" />
-    <Content Include="backOffice\chartjs-polar-radar-charts.html" />
-    <Content Include="backOffice\chartjs-scatter-charts.html" />
-    <Content Include="backOffice\component-alerts.html" />
-    <Content Include="backOffice\component-badges.html" />
-    <Content Include="backOffice\component-buttons-basic.html" />
-    <Content Include="backOffice\component-buttons-extended.html" />
-    <Content Include="backOffice\component-callout.html" />
-    <Content Include="backOffice\component-carousel.html" />
-    <Content Include="backOffice\component-collapse.html" />
-    <Content Include="backOffice\component-dropdowns.html" />
-    <Content Include="backOffice\component-list-group.html" />
-    <Content Include="backOffice\component-media-objects.html" />
-    <Content Include="backOffice\component-modals.html" />
-    <Content Include="backOffice\component-navs-component.html" />
-    <Content Include="backOffice\component-pagination.html" />
-    <Content Include="backOffice\component-pill-badges.html" />
-    <Content Include="backOffice\component-pills-component.html" />
-    <Content Include="backOffice\component-popovers.html" />
-    <Content Include="backOffice\component-progress.html" />
-    <Content Include="backOffice\component-scrollable.html" />
-    <Content Include="backOffice\component-spinners.html" />
-    <Content Include="backOffice\component-tabs-component.html" />
-    <Content Include="backOffice\component-tooltips.html" />
-    <Content Include="backOffice\dashboard-hospital.html" />
+    <Content Include="backOffice\Actions.aspx" />
+    <Content Include="backOffice\CustomerAdd.aspx" />
+    <Content Include="backOffice\CustomerList.aspx" />
     <Content Include="backOffice\default.aspx" />
-    <Content Include="backOffice\form-layout-basic.html" />
-    <Content Include="backOffice\form-layout-bordered.html" />
-    <Content Include="backOffice\form-layout-form-actions.html" />
-    <Content Include="backOffice\form-layout-hidden-labels.html" />
-    <Content Include="backOffice\form-layout-horizontal.html" />
-    <Content Include="backOffice\form-layout-row-separator.html" />
-    <Content Include="backOffice\form-layout-striped-labels.html" />
-    <Content Include="backOffice\form-layout-striped-rows.html" />
-    <Content Include="backOffice\form-wizard-circle-style.html" />
-    <Content Include="backOffice\form-wizard-notification-style.html" />
-    <Content Include="backOffice\full-calender-basic.html" />
-    <Content Include="backOffice\hospital-add-doctor.html" />
-    <Content Include="backOffice\hospital-add-patient.html" />
-    <Content Include="backOffice\hospital-add-payments.html" />
-    <Content Include="backOffice\hospital-book-appointment.html" />
-    <Content Include="backOffice\hospital-doctor-profile.html" />
-    <Content Include="backOffice\hospital-doctor-schedule.html" />
-    <Content Include="backOffice\hospital-doctors-list.html" />
-    <Content Include="backOffice\hospital-patient-profile.html" />
-    <Content Include="backOffice\hospital-patients-list.html" />
-    <Content Include="backOffice\hospital-payment-reports.html" />
-    <Content Include="backOffice\hospital-payments.html" />
-    <Content Include="backOffice\index.html" />
-    <Content Include="backOffice\invoice-list.html" />
-    <Content Include="backOffice\invoice-summary.html" />
-    <Content Include="backOffice\invoice-template.html" />
+    <Content Include="backOffice\DepartmentAdd.aspx" />
+    <Content Include="backOffice\DepartmentList.aspx" />
     <Content Include="backOffice\KitAdd.aspx" />
     <Content Include="backOffice\KitList.aspx" />
-    <Content Include="backOffice\login-with-bg-image.html" />
-    <Content Include="backOffice\recover-password.html" />
-    <Content Include="backOffice\register-with-bg-image.html" />
-    <Content Include="backOffice\table-basic.html" />
-    <Content Include="backOffice\table-border.html" />
-    <Content Include="backOffice\table-components.html" />
-    <Content Include="backOffice\table-sizing.html" />
-    <Content Include="backOffice\table-styling.html" />
+    <Content Include="backOffice\LogAdd.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="backOffice\LogList.aspx" />
+    <Content Include="backOffice\PartAdd.aspx" />
+    <Content Include="backOffice\PartList.aspx" />
+    <Content Include="backOffice\ProcedureList.aspx" />
+    <Content Include="backOffice\ProcedureAdd.aspx" />
+    <Content Include="backOffice\ResearchAdd.aspx" />
+    <Content Include="backOffice\ResearchList.aspx" />
+    <Content Include="backOffice\RoleAdd.aspx" />
+    <Content Include="backOffice\RoleList.aspx" />
+    <Content Include="backOffice\SeriesActionAdd.aspx" />
+    <Content Include="backOffice\SeriesActionList.aspx" />
+    <Content Include="backOffice\StockKitAdd.aspx" />
+    <Content Include="backOffice\StockKitList.aspx" />
+    <Content Include="backOffice\StockPartAdd.aspx" />
+    <Content Include="backOffice\StockPartList.aspx" />
+    <Content Include="backOffice\UsersAdd.aspx" />
+    <Content Include="backOffice\UsersList.aspx" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\BLL\Action.cs" />
     <Compile Include="App_Code\BLL\Customer.cs" />
     <Compile Include="App_Code\BLL\Kit.cs" />
     <Compile Include="App_Code\BLL\Log.cs" />
     <Compile Include="App_Code\BLL\Part.cs" />
+    <Compile Include="App_Code\BLL\Procedure.cs" />
     <Compile Include="App_Code\BLL\Research.cs" />
     <Compile Include="App_Code\BLL\Role.cs" />
     <Compile Include="App_Code\BLL\SeriesAction.cs" />
     <Compile Include="App_Code\BLL\StockKit.cs" />
     <Compile Include="App_Code\BLL\StockPart.cs" />
     <Compile Include="App_Code\BLL\Users.cs" />
-    <Compile Include="App_Code\DAL\ActionDAL.cs" />
     <Compile Include="App_Code\DAL\CustomerDAL.cs" />
+    <Compile Include="App_Code\DAL\ProcedureDAL.cs" />
     <Compile Include="App_Code\DBContext.cs" />
     <Compile Include="App_Code\DAL\DepartmentDAL.cs" />
     <Compile Include="App_Code\DAL\KitDAL.cs" />
@@ -5729,13 +5713,51 @@
     <Compile Include="App_Code\DAL\StockPartDAL.cs" />
     <Compile Include="App_Code\DAL\UsersDAL.cs" />
     <Compile Include="App_Code\BLL\Department.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="backOffice\Actions.aspx.cs">
+      <DependentUpon>Actions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\Actions.aspx.designer.cs">
+      <DependentUpon>Actions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\CustomerAdd.aspx.cs">
+      <DependentUpon>CustomerAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\CustomerAdd.aspx.designer.cs">
+      <DependentUpon>CustomerAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\CustomerList.aspx.cs">
+      <DependentUpon>CustomerList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\CustomerList.aspx.designer.cs">
+      <DependentUpon>CustomerList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="backOffice\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="backOffice\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\DepartmentAdd.aspx.cs">
+      <DependentUpon>DepartmentAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\DepartmentAdd.aspx.designer.cs">
+      <DependentUpon>DepartmentAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\DepartmentList.aspx.cs">
+      <DependentUpon>DepartmentList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\DepartmentList.aspx.designer.cs">
+      <DependentUpon>DepartmentList.aspx</DependentUpon>
     </Compile>
     <Compile Include="backOffice\KitAdd.aspx.cs">
       <DependentUpon>KitAdd.aspx</DependentUpon>
@@ -5751,6 +5773,27 @@
     <Compile Include="backOffice\KitList.aspx.designer.cs">
       <DependentUpon>KitList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="backOffice\LogAdd.aspx.cs">
+      <DependentUpon>LogAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\LogAdd.aspx.designer.cs">
+      <DependentUpon>LogAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\LogList.aspx.cs">
+      <DependentUpon>LogList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\LogList.aspx.designer.cs">
+      <DependentUpon>LogList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="backOffice\main.Master.cs">
       <DependentUpon>main.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5758,12 +5801,124 @@
     <Compile Include="backOffice\main.Master.designer.cs">
       <DependentUpon>main.Master</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\ActionController.cs" />
+    <Compile Include="backOffice\PartAdd.aspx.cs">
+      <DependentUpon>PartAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\PartAdd.aspx.designer.cs">
+      <DependentUpon>PartAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\PartList.aspx.cs">
+      <DependentUpon>PartList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\PartList.aspx.designer.cs">
+      <DependentUpon>PartList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\ProcedureList.aspx.cs">
+      <DependentUpon>ProcedureList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\ProcedureList.aspx.designer.cs">
+      <DependentUpon>ProcedureList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\ProcedureAdd.aspx.cs">
+      <DependentUpon>ProcedureAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\ProcedureAdd.aspx.designer.cs">
+      <DependentUpon>ProcedureAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\ResearchAdd.aspx.cs">
+      <DependentUpon>ResearchAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\ResearchAdd.aspx.designer.cs">
+      <DependentUpon>ResearchAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\ResearchList.aspx.cs">
+      <DependentUpon>ResearchList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\ResearchList.aspx.designer.cs">
+      <DependentUpon>ResearchList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\RoleAdd.aspx.cs">
+      <DependentUpon>RoleAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\RoleAdd.aspx.designer.cs">
+      <DependentUpon>RoleAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\RoleList.aspx.cs">
+      <DependentUpon>RoleList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\RoleList.aspx.designer.cs">
+      <DependentUpon>RoleList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\SeriesActionAdd.aspx.cs">
+      <DependentUpon>SeriesActionAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\SeriesActionAdd.aspx.designer.cs">
+      <DependentUpon>SeriesActionAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\SeriesActionList.aspx.cs">
+      <DependentUpon>SeriesActionList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\SeriesActionList.aspx.designer.cs">
+      <DependentUpon>SeriesActionList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\StockKitAdd.aspx.cs">
+      <DependentUpon>StockKitAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\StockKitAdd.aspx.designer.cs">
+      <DependentUpon>StockKitAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\StockKitList.aspx.cs">
+      <DependentUpon>StockKitList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\StockKitList.aspx.designer.cs">
+      <DependentUpon>StockKitList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\StockPartAdd.aspx.cs">
+      <DependentUpon>StockPartAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\StockPartAdd.aspx.designer.cs">
+      <DependentUpon>StockPartAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\StockPartList.aspx.cs">
+      <DependentUpon>StockPartList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\StockPartList.aspx.designer.cs">
+      <DependentUpon>StockPartList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\UsersAdd.aspx.cs">
+      <DependentUpon>UsersAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\UsersAdd.aspx.designer.cs">
+      <DependentUpon>UsersAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice\UsersList.aspx.cs">
+      <DependentUpon>UsersList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice\UsersList.aspx.designer.cs">
+      <DependentUpon>UsersList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\KitController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\PartController.cs" />
+    <Compile Include="Controllers\ProcedureController.cs" />
     <Compile Include="Controllers\ResearchController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SeriesActionController.cs" />
@@ -6311,7 +6466,12 @@
     <Content Include="app-assets\vendors\js\editors\tinymce\themes\silver\.npmrc" />
     <Content Include="assets\scss\style-rtl.scss" />
     <Content Include="assets\scss\style.scss" />
+    <Content Include=".editorconfig" />
     <None Include="packages.config" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -6355,6 +6515,8 @@
     <Folder Include="app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\webdriver\editor\" />
     <Folder Include="App_Data\" />
     <Folder Include="App_GlobalResources\" />
+    <Folder Include="Views\MyAction\" />
+    <Folder Include="Views\Procedure\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

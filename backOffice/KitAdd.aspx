@@ -4,13 +4,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainCnt" runat="server">
        <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">הוספת מיוחד קיט</h3>
+                    <h3 class="content-header-title">העלאת קיטים</h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="default.aspx">דף הבית</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">תשלומים</a>
+                                <li class="breadcrumb-item"><a href="KitList.aspx">קיטים</a>
                                 </li> 
                                 <li class="breadcrumb-item active">הוספת קיט
                                 </li>
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="content-body">
-                <!-- Add Payments -->
+                
 
                 <section id="add-payments">
                     <div class="card">
@@ -34,81 +34,64 @@
                             <h2 class="card-title">הוסף קיט חדש</h2>
                         </div>
                         <div class="card-body">
+                             <asp:HiddenField ID="HIdKitId" runat="server" />
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Kit Id">
+                                        <asp:TextBox ID="TxtKitName" runat="server" class="form-control" placeholder="נא הזן שם קיט" />
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Kit Name">
+                                         <asp:TextBox ID="TxtKitTag" runat="server" class="form-control" placeholder="נא הזן מספר תג" />
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Worker Name">
+                                         <asp:TextBox ID="TxtKitBarcode" runat="server" class="form-control" placeholder="נא הזן ברקוד" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <asp:TextBox ID="TxtKitDesc" runat="server" class="form-control" placeholder="תיאור"/>
+                                    </div>
+                                </div>
+                            </div>
+                           <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <asp:TextBox ID="TxtKitImage" runat="server" class="form-control" placeholder="תמונה"/>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group"><asp:DropDownList runat="server" ID="DDLCustomerId"  class="form-control"></asp:DropDownList>
+                                       
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="date" class="form-control" placeholder="Payment Date">
+                                         <asp:TextBox ID="TxtNumOfParts" runat="server" class="form-control" placeholder="נא הזן מספר החלקים" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" placeholder="Total Amount">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" placeholder="Discount">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <select name="paymentMethod" class="form-control">
-                                            <option value="select">Select Payment Method</option>
-                                            <option value="cash">ניקוי חול</option>
-                                            <option value="credit">חומצות</option>
-                                            <option value="debit">qc</option>
-                                            <option value="cheque">אריזה</option>
-                                            <option value="netbanking">מוכן למשלוח</option>
-                                            <option value="insaurance">נשלח</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <select name="paymentStatus" class="form-control">
-                                            <option value="select">Select Payment Status</option>
-                                            <option value="pending">Pending</option>
-                                            <option value="partial">Partial</option>
-                                            <option value="Complete">Complete</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                             
                         <div class="card-footer ml-auto">
                             <span>
-                                <button class="btn btn-outline-success mr-1">Submit</button> <button class="btn btn-outline-danger">Cancel</button>
+                                 <asp:Button ID="BtnSave" runat="server" class="btn btn-outline-success mr-1" Text="שמירה" OnClick="BtnSave_Click" />
                             </span>
                         </div>
+
                     </div>
                 </section>
             </div>
