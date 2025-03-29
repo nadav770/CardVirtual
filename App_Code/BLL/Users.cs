@@ -38,6 +38,7 @@ namespace BLL
         {
             return UsersDAL.DeleteById(Id);
         }
+        //כאן נמצאת פונקציית המפתח שדרכה נשען כל הflow של הפרויקט
         public void  CheckLogin()
         {
              UsersDAL.CheckLogin(this);
