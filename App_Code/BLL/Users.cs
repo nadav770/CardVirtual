@@ -23,17 +23,17 @@ namespace BLL
             UsersDAL.Save(this);
         }
 
-        // פונקציה לקבלת כל הקיטים
+        // פונקציה לקבלת כל המשתמשים  
         public static List<Users> GetAll()
         {
             return UsersDAL.GetAll();
         }
-        // פונקציה לקבלת קיט לפי מזהה
+        // פונקציה לקבלת משתמש  לפי מזהה
         public static Users GetById(int Id)
         {
             return UsersDAL.GetById(Id);
         }
-        //פונקציה למחיקת קיט לפי מזהה
+        //פונקציה למחיקת משתמש לפי מזהה
         public static int DeleteById(int Id)
         {
             return UsersDAL.DeleteById(Id);
