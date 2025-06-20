@@ -1,0 +1,180 @@
+CardVirtual
+
+   
+
+> CardVirtual is a web‑based system for creating and managing Run Cards – digital instruction cards that guide employees through multi‑step industrial workflows (factories, garages, logistics centers and more).
+
+
+
+
+---
+
+Table of Contents
+
+1. Features
+
+
+2. Tech Stack
+
+
+3. Architecture
+
+
+4. Local Setup
+
+
+5. Docker Compose
+
+
+6. Running Tests
+
+
+7. CI / CD
+
+
+8. Roadmap
+
+
+9. Contributing
+
+
+10. License
+
+
+
+
+---
+
+✨ Features
+
+RunCard lifecycle – create, edit and progress instruction cards step‑by‑step
+
+Digital signatures – workers sign each stage before moving forward
+
+Role‑based access control (RBAC) – admins, supervisors, operators
+
+Audit trail – every action is logged for traceability
+
+Responsive UI – works on desktop, tablet and shop‑floor terminals
+
+
+🛠️ Tech Stack
+
+Layer	Technology
+
+Backend	C# / ASP.NET MVC, Entity Framework
+Database	SQL Server
+Frontend	JavaScript, HTML5, CSS3
+Dev Ops	Docker & Docker Compose, GitHub Actions
+Testing	xUnit + FluentAssertions (unit) • Playwright (E2E)
+
+
+🗂️ Architecture
+
+┌───────────┐      ┌────────┐      ┌────────────┐
+│   UI      │      │  BLL   │      │    DAL     │
+│ (MVC + JS)│──▶──▶│ Services│──▶──▶│ EF Models  │
+└───────────┘      └────────┘      └────────────┘
+        ▲                               │
+        │ REST API                      │ SQL
+        ▼                               ▼
+    Client App                    SQL Server
+
+> Separation of Concerns: the Business Logic Layer (BLL) orchestrates workflow rules, while the Data Access Layer (DAL) owns all queries.
+
+
+
+⚡ Local Setup
+
+# clone repository
+$ git clone https://github.com/nadav770/CardVirtual.git
+$ cd CardVirtual
+
+# run inside Visual Studio *or* with Docker (recommended)
+$ docker compose up --build -d  # http://localhost:8080
+
+🐳 Docker Compose
+
+version: '3.9'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - ConnectionStrings__Default=Server=db;Database=CardVirtual;User=sa;Password=Your_strong_password123;
+    depends_on:
+      - db
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Your_strong_password123
+    ports:
+      - "1433:1433"
+
+🧪 Running Tests
+
+# unit tests
+$ dotnet test
+# E2E tests (Playwright)
+$ npx playwright test
+
+🚀 CI / CD
+
+A reusable GitHub Actions pipeline (<code>.github/workflows/ci.yml</code>) builds the project, runs tests, publishes a Docker image and can deploy to Azure Web App / Render / Fly.io.
+
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+      - name: Test
+        run: dotnet test --no-build --configuration Release --logger trx
+      - name: Publish Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: your-dockerhub-user/cardvirtual:latest
+
+🗺️ Roadmap
+
+[ ] Multi‑tenant support
+
+[ ] Real‑time stage updates via SignalR
+
+[ ] OAuth 2 / OpenID Connect (Azure AD)
+
+[ ] Dark mode UI
+
+
+🤝 Contributing
+
+Pull requests are welcome! For major changes, open an issue first to discuss what you would like to change.
+
+📜 License
+
+Distributed under the MIT License. See LICENSE for more information.
+
+
+---
+
+🇮🇱 סיכום קצר בעברית
+
+CardVirtual היא מערכת לניהול כרטיסי עבודה דיגיטליים (Run Cards) עם חתימות דיגיטליות, הרשאות תפקידים, ובדיקות אוטומטיות ‑ נבנתה ב‑ASP.NET + SQL Server ומגיעה עם Docker ו־CI/CD מלא.
+
